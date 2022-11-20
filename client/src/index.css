@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: poppins;
+  background-color:#F3F1F5;
+}
+.mainBody{
+  min-height: 100vh;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+
+.input-box {
+  border: 1px solid #e2e2e2;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+div.inputblock {
+  position: relative;
+  border: 1px solid #e2e2e2;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+div.inputblock input {
+  font-weight: 500;
+  font-size: 1.6rem;
+  color: #495055;
+  width: 60%;
+  padding: 15px 15px;
+
+  background-color: transparent;
+
+  outline:none;
+}
+div.inputblock .select {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #495055;
+  width: 30%;
+  padding: 15px 15px;
+
+  background-color: transparent;
+
+  outline:none;
+}
+div.inputblock span.placeholder {
+  position: absolute;
+  margin: 17px 0;
+  padding: 0 4px;
+  font-family: Roboto, sans-serif;
+  color:  #b8bfc5;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  top: 0;
+  left: 17px;
+  transition: all 0.2s;
+  transform-origin: 0% 0%;
+  background: none;
+  pointer-events: none;
+}
+div.inputblock input:valid + span.placeholder,
+div.inputblock input:focus + span.placeholder {
+  transform: scale(0.6) translateY(-30px);
+  background-color: transparent;
+}
+div.inputblock input:focus{
+  color: #284B63;
+  outline: none;
+}
+div.inputblock input:focus + span.placeholder {
+  color: #284B63;
+  outline: none;
+}
+.footerbottom{
+text-align: center;
+}
+.iconRight{
+  transform: rotate(180deg);
+  transition: 0.3s;
+}
+.iconLeft{
+  transition: 0.3s;
+}
