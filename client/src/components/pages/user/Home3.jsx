@@ -86,82 +86,125 @@ const Home = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const modal = useDisclosure();
 
-  const [denemez,setdenemez] = useState(null);
+//   const [denemez,setdenemez] = useState(null);
 
 
 
 
 
-// let starters = activeCurrencies.find(i => i.name==="KES")
+// // let starters = activeCurrencies.find(i => i.name==="KES")
 
 
-const [radioOne,setRadioOne] = useState({
-  currency:starterOne.name,
-  price:starterOne.price || 1 
-});
+// const [radioOne,setRadioOne] = useState({
+//   currency:starterOne.name,
+//   price:starterOne.price
+// });
 
-const [inputOne,setInputOne] = useState({
-  price:radioOne.price,
-  currency:radioOne.currency
-});
+// const [inputOne,setInputOne] = useState({
+//   price:radioOne.price,
+//   currency:radioOne.currency
+// });
 
-const [radioTwo,setRadioTwo] = useState({
-  currency:starterTwo.name,
-  price:starterTwo.price || 6.5
-});
-const [inputTwo,setInputTwo] = useState({
-  price:radioTwo.price,
-  currency:radioTwo.currency
-});
-const handleChangeOne = (e) =>{
-  setInputOne({...inputOne,[e.target.name]:e.target.value})
-  setInputTwo({...inputTwo,price:e.target.value * radioTwo.price})
-  console.log(inputOne)
-};
-const handleChangeTwo = (e) =>{
-  setInputTwo({...inputTwo,[e.target.name]:e.target.value })
-  setInputOne({...inputOne,price:e.target.value / radioTwo.price})
-};
-const handleChangeOneRadio = async (e,element) =>{
+// const [radioTwo,setRadioTwo] = useState({
+//   currency:starterTwo.name,
+//   price:starterTwo.price
+// });
+// const [inputTwo,setInputTwo] = useState({
+//   price:radioTwo.price,
+//   currency:radioTwo.currency
+// });
+// const handleChangeOne = (e) =>{
+//   setInputOne({...inputOne,[e.target.name]:e.target.value})
+//   setInputTwo({...inputTwo,price:e.target.value * radioTwo.price})
+//   console.log(inputOne)
+// };
+// const handleChangeTwo = (e) =>{
+//   setInputTwo({...inputTwo,[e.target.name]:e.target.value })
+//   setInputOne({...inputOne,price:e.target.value / radioTwo.price})
+// };
+// const handleChangeOneRadio = async (e,element) =>{
 
-console.log(e.target.value)
-setdenemez(element)
-setRadioOne({currency:element.name,price:element.price})
-console.log(denemez)
-console.log(radioOne)
-};
-const handleChangeTwoRadio = (e,element) =>{
-  setRadioTwo({currency:element.name,price:element.price})
-  console.log(radioTwo)
-};
-const handleSubmit = (e) =>{
-e.preventDefault();
-};
+// console.log(e.target.value)
+// setdenemez(element)
+// setRadioOne({currency:element.name,price:element.price})
+// console.log(denemez)
+// console.log(radioOne)
+// };
+// const handleChangeTwoRadio = (e,element) =>{
+//   setRadioTwo({currency:element.name,price:element.price})
+//   console.log(radioTwo)
+// };
+// const handleSubmit = (e) =>{
+// e.preventDefault();
+// };
+
+
+
+
+
+// // useEffect(()=>{
+// // // console.log(activeCurrencies)
+// // console.log(starterOne,starterTwo )
+// // },[activeCurrencies,starterOne,starterTwo])
+
 
 
 
 
 
 // useEffect(()=>{
-// // console.log(activeCurrencies)
-// console.log(starterOne,starterTwo )
-// },[activeCurrencies,starterOne,starterTwo])
-
-
-
-
-
-
-useEffect(()=>{
-  // if(activeCurrencies!== null){
-  //   const ks = activeCurrencies.find(i => i.name==="KES")
-  //   setRadioTwo({...radioTwo,price:ks.price})
-  //   // console.log(ks)
-  // }
-  // console.log(activeCurrencies)
+//   // if(activeCurrencies!== null){
+//   //   const ks = activeCurrencies.find(i => i.name==="KES")
+//   //   setRadioTwo({...radioTwo,price:ks.price})
+//   //   // console.log(ks)
+//   // }
+//   // console.log(activeCurrencies)
   
 
-},[activeCurrencies,denemez,setRadioTwo,radioTwo]);
+// },[activeCurrencies,denemez,setRadioTwo,radioTwo]);
+
+const [inputs,setInputs] = useState({inputOne:{
+  price:1,
+  currencyDB:{
+    price:1,
+    currency:"TRY"
+  }
+},inputTwo:{
+  price:6.5,
+  currencyDB:{
+    price:6.5,
+    currency:"KES"
+  }
+}})
+const handleChangeOne =  (e) =>{
+  setInputs({...inputs,inputOne:{
+    ...inputs.inputOne,price:Number(e.target.value)
+  }})
+
+  console.log(inputs)
+}
+const handleChangeTwo = (e) =>{
+  setInputs({...inputs,inputTwo:{
+    ...inputs.inputTwo,price:Number(e.target.value) 
+  }})
+  // setInputs({inputTwo:{
+  //   ...inputs.inputTwo,price:Number(e.target.value)
+  // },inputsOne:{...inputs.inputOne,price:e.target.value / 6.5}})
+  // setInputs({...inputs,inputOne:{
+  //   ...inputs.inputOne,price:e.target.value / inputs.inputTwo.currencyDB.price
+  // }})
+  console.log(inputs)
+}
+
+
+
+
+
+
+const handleSubmit = (e)=>{
+  e.preventDefault();
+}
+
 
 
 
@@ -207,12 +250,12 @@ useEffect(()=>{
             <form onSubmit={handleSubmit}>
               <div className="inputblock">
                 <input
-                  onChange={turnCycle ? handleChangeOne : handleChangeTwo}
+                  onChange={turnCycle ? handleChangeOne: handleChangeTwo}
                   name="price"
                   value={
-                    turnCycle ? inputOne.price : inputTwo.price
+                    turnCycle ? inputs.inputOne.price : inputs.inputTwo.price
                   }
-                  type= "number"
+                  type="number"
                   id="input-text"
                   required
                   spellCheck="false"
@@ -231,9 +274,9 @@ useEffect(()=>{
                 >
                   <img src={turnCycle ? TRY : KES} alt="" />
                   <Text fontWeight="500">
-                    {turnCycle
+                    {/* {turnCycle
                       ? radioOne.currency
-                      : radioOne.currency}
+                      : radioOne.currency} */}
                     <ChevronDownIcon ml="2 " />
                   </Text>
                 </Box>
@@ -256,17 +299,14 @@ useEffect(()=>{
                                 {
                                   flags.map((flag,flagIndex)=>(
 
-                                      flag.name === element.name && 
-                                      <Flex key={flagIndex} alignItems="center">
-                                      <img  src={flag.url} alt=" "/>
-                                      <Text>{flag.name}</Text>
-                    
-                                    </Flex>
+                                      flag.name === element.name && <img key={flagIndex} src={flag.url} alt=" "/>
 )
                                     
                                   )
                                 }
-                                <input type="radio"  onChange={(e)=>handleChangeOneRadio(e,element)} value={element.name} name="currency"/>
+                                <input type="radio"
+                                  // onChange={(e)=>handleChangeOneRadio(e,element)} 
+                                  value={element.name} name="currency"/>
                                 {/* <RadioGroup name="inputOne.currency" onChange={handleChange} value={values.inputOne.currency}>
                                   <Stack direction='column'>
                                   <Radio  value={active}><Flex alignItems="center" justifyContent="space-around">
@@ -293,7 +333,7 @@ useEffect(()=>{
                       <Button colorScheme="blue" mr={3} onClick={modal.onClose}>
                         Close
                       </Button>
-                      <Button type="submit" onClick={()=>console.log(inputOne,inputTwo)} variant="ghost">
+                      <Button type="submit" onClick={()=>console.log(inputs.inputOne,inputs.inputTwo)} variant="ghost">
                         Secondary Action
                       </Button>
                     </ModalFooter>
@@ -315,11 +355,11 @@ useEffect(()=>{
               </Box>
               <div className="inputblock">
                 <input
-                onChange={turnCycle ? handleChangeTwo : handleChangeOne}
+                   onChange={turnCycle ? handleChangeTwo: handleChangeOne}
                   type="number"
                   name="price"
                   value={
-                    turnCycle ? inputTwo.price : inputOne.price
+                    turnCycle ? inputs.inputTwo.price : inputs.inputOne.price
                   }
                   id="input-text-2"
                   required
@@ -327,7 +367,7 @@ useEffect(()=>{
              
                 />
                 <span className="placeholder">
-               Recipient gets exactly
+               Recipient gets
                 </span>
                 <Box
                   cursor="pointer"
@@ -339,9 +379,9 @@ useEffect(()=>{
                 >
                   <img src={turnCycle ? KES : TRY} alt="" />
                   <Text fontWeight="500">
-                    {turnCycle
+                    {/* {turnCycle
                       ? radioTwo.currency
-                      : radioTwo.currency}
+                      : radioTwo.currency} */}
                     <ChevronDownIcon ml="2 " />
                   </Text>
                 </Box>
@@ -364,17 +404,14 @@ useEffect(()=>{
           {
             flags.map((flag,flagIndex)=>(
 
-                flag.name === element.name && 
-                <Flex key={flagIndex} alignItems="center">
-                  <img  src={flag.url} alt=" "/>
-                  <Text>{flag.name}</Text>
-
-                </Flex>
+                flag.name === element.name && <img key={flagIndex} src={flag.url} alt=" "/>
 )
               
             )
           }
-          <input type="radio" onChange={(e)=>handleChangeTwoRadio(e,element)} value={element.name} name="currency"/>
+          <input type="radio" 
+          // onChange={(e)=>handleChangeTwoRadio(e,element)}
+           value={element.name} name="currency"/>
           {/* <RadioGroup name="inputOne.currency" onChange={handleChange} value={values.inputOne.currency}>
             <Stack direction='column'>
             <Radio  value={active}><Flex alignItems="center" justifyContent="space-around">
@@ -401,7 +438,7 @@ useEffect(()=>{
 <Button colorScheme="blue" mr={3} onClick={onClose}>
   Close
 </Button>
-<Button type="submit" onClick={()=>console.log(inputOne,inputTwo)} variant="ghost">
+<Button type="submit" onClick={()=>console.log(inputs.inputOne,inputs.inputTwo)} variant="ghost">
   Secondary Action
 </Button>
 </ModalFooter>

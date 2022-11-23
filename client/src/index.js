@@ -6,18 +6,23 @@ import reportWebVitals from './reportWebVitals';
 import { ChakraProvider } from '@chakra-ui/react'
 import { ThemesProvider } from './contexts/ThemeContext';
 import { RatesProvider } from './contexts/RatesContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ThemesProvider>
+    
     <ChakraProvider>
+      <AuthProvider>
+      <ThemesProvider>
       <RatesProvider>
       <App />
       </RatesProvider>
+      </ThemesProvider>  
+      </AuthProvider>
     </ChakraProvider>
-    </ThemesProvider>  
+    
   </React.StrictMode>
 );
 

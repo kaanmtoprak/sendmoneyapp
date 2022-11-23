@@ -97,7 +97,7 @@ const Home = () => {
 
 const [radioOne,setRadioOne] = useState({
   currency:starterOne.name,
-  price:starterOne.price || 1 
+  price:starterOne.price
 });
 
 const [inputOne,setInputOne] = useState({
@@ -107,7 +107,7 @@ const [inputOne,setInputOne] = useState({
 
 const [radioTwo,setRadioTwo] = useState({
   currency:starterTwo.name,
-  price:starterTwo.price || 6.5
+  price:starterTwo.price
 });
 const [inputTwo,setInputTwo] = useState({
   price:radioTwo.price,
@@ -207,7 +207,10 @@ useEffect(()=>{
             <form onSubmit={handleSubmit}>
               <div className="inputblock">
                 <input
-                  onChange={turnCycle ? handleChangeOne : handleChangeTwo}
+                  onChange={(e)=>{
+
+                    handleChangeOne(e)
+                  }}
                   name="price"
                   value={
                     turnCycle ? inputOne.price : inputTwo.price
@@ -256,12 +259,7 @@ useEffect(()=>{
                                 {
                                   flags.map((flag,flagIndex)=>(
 
-                                      flag.name === element.name && 
-                                      <Flex key={flagIndex} alignItems="center">
-                                      <img  src={flag.url} alt=" "/>
-                                      <Text>{flag.name}</Text>
-                    
-                                    </Flex>
+                                      flag.name === element.name && <img key={flagIndex} src={flag.url} alt=" "/>
 )
                                     
                                   )
@@ -315,7 +313,7 @@ useEffect(()=>{
               </Box>
               <div className="inputblock">
                 <input
-                onChange={turnCycle ? handleChangeTwo : handleChangeOne}
+                  onChange={handleChangeTwo}
                   type="number"
                   name="price"
                   value={
@@ -327,7 +325,7 @@ useEffect(()=>{
              
                 />
                 <span className="placeholder">
-               Recipient gets exactly
+               Recipient gets
                 </span>
                 <Box
                   cursor="pointer"
@@ -364,12 +362,7 @@ useEffect(()=>{
           {
             flags.map((flag,flagIndex)=>(
 
-                flag.name === element.name && 
-                <Flex key={flagIndex} alignItems="center">
-                  <img  src={flag.url} alt=" "/>
-                  <Text>{flag.name}</Text>
-
-                </Flex>
+                flag.name === element.name && <img key={flagIndex} src={flag.url} alt=" "/>
 )
               
             )
