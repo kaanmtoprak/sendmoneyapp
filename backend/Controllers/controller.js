@@ -389,15 +389,16 @@ exports.Logout = async (req, res, next) => {
 		}
 
 		const user_id = await verifyRefreshToken(refresh_token);
-		const data = await redis.del(user_id);
+		// const data = await redis.del(user_id);
 
-		if (!data) {
+		if (!user_id) { //dikkat
 			throw Boom.badRequest();
 		}
 
 		res.json({ message: "success" });
 	} catch (e) {
 		console.log(e);
+        res.json({annen:"elimde"})
 		return next(e);
 	}
 };

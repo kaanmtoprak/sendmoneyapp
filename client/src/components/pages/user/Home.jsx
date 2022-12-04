@@ -35,6 +35,7 @@ import { useRates } from "../../../contexts/RatesContext";
 const Home = () => {
   const [turnCycle, setturnCycle] = useState(true);
   const { announce, information, header } = useTheme();
+  const [radioControl,setRadioControl]= useState(false)
   const {currencies,activeCurrencies,starterOne,
     starterTwo
     } = useRates();
@@ -96,7 +97,7 @@ const Home = () => {
 
 
 const [radioOne,setRadioOne] = useState({
-  currency:starterOne.name,
+  currency:starterOne.name || "TRY",
   price:starterOne.price || 1 
 });
 
@@ -106,7 +107,7 @@ const [inputOne,setInputOne] = useState({
 });
 
 const [radioTwo,setRadioTwo] = useState({
-  currency:starterTwo.name,
+  currency:starterTwo.name || "KES",
   price:starterTwo.price || 6.5
 });
 const [inputTwo,setInputTwo] = useState({
@@ -130,7 +131,7 @@ setRadioOne({currency:element.name,price:element.price})
 console.log(denemez)
 console.log(radioOne)
 };
-const handleChangeTwoRadio = (e,element) =>{
+const handleChangeTwoRadio = async (e,element) =>{
   setRadioTwo({currency:element.name,price:element.price})
   console.log(radioTwo)
 };
@@ -142,10 +143,11 @@ e.preventDefault();
 
 
 
-// useEffect(()=>{
-// // console.log(activeCurrencies)
-// console.log(starterOne,starterTwo )
-// },[activeCurrencies,starterOne,starterTwo])
+useEffect(()=>{
+
+console.log(radioOne,radioTwo )
+},[radioOne,radioTwo])
+
 
 
 
@@ -194,7 +196,11 @@ useEffect(()=>{
           >
             <Box mb="7">
               <Text fontWeight="500" color="#7F7C82" m="3">
-                1 USD ($) = 18.7 TRY (₺)
+
+
+                {
+                    turnCycle ? "1 TRY (₺) = 6.5 KES" : "1 KES = 0,1538 TRY (₺) "
+                  }
               </Text>
               <Text fontWeight="500" fontSize="sm" color="#7F7C82" m="3">
                 {information.information !== null ? (
@@ -266,7 +272,7 @@ useEffect(()=>{
                                     
                                   )
                                 }
-                                <input type="radio"  onChange={(e)=>handleChangeOneRadio(e,element)} value={element.name} name="currency"/>
+                                <input type="radio" onClick={(e)=>setRadioControl(e.target.value)}  onChange={(e)=>handleChangeOneRadio(e,element)} value={element.name} name="currency"/>
                                 {/* <RadioGroup name="inputOne.currency" onChange={handleChange} value={values.inputOne.currency}>
                                   <Stack direction='column'>
                                   <Radio  value={active}><Flex alignItems="center" justifyContent="space-around">
@@ -293,8 +299,8 @@ useEffect(()=>{
                       <Button colorScheme="blue" mr={3} onClick={modal.onClose}>
                         Close
                       </Button>
-                      <Button type="submit" onClick={()=>console.log(inputOne,inputTwo)} variant="ghost">
-                        Secondary Action
+                      <Button type="submit" onClick={()=>setRadioControl(true)} colorScheme="green">
+                        Select
                       </Button>
                     </ModalFooter>
                   </ModalContent>
@@ -401,8 +407,8 @@ useEffect(()=>{
 <Button colorScheme="blue" mr={3} onClick={onClose}>
   Close
 </Button>
-<Button type="submit" onClick={()=>console.log(inputOne,inputTwo)} variant="ghost">
-  Secondary Action
+<Button type="submit" onClick={()=>setRadioControl(true)} colorScheme="green">
+  Select
 </Button>
 </ModalFooter>
                   </ModalContent>

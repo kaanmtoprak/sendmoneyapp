@@ -32,6 +32,7 @@ export const fetchLogOut = async()=>{
         refresh_token: localStorage.getItem("refresh-token")
         
     });
+
     return data;
 }
 

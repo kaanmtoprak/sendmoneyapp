@@ -22,10 +22,10 @@ const fetchCurrencies = useCallback(
         setCurrencies(data.data)
         const activeFilter = await  data.data.filter(actives=>actives.activity)
         setActiveCurrencies(activeFilter)
-        const startOne = await activeCurrencies.find(i => i.name==="TRY")
-        setStarterOne(startOne)
-        const startTwo = await activeCurrencies.find(i => i.name==="KES")
-        setStarterTwo(startTwo)
+        // const startOne = await activeCurrencies.find(i => i.name==="TRY")
+        // setStarterOne(startOne)
+        // const startTwo = await activeCurrencies.find(i => i.name==="KES")
+        // setStarterTwo(startTwo)
     
         
     },[activeCurrencies]

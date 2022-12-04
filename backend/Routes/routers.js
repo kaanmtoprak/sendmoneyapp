@@ -71,6 +71,7 @@ router.post("/create-currency", addCurrency);
 router.post("/login", loginUser);
 router.post("/register", registerUser);
 router.post("/refresh_token", RefreshToken);
+router.post('/logout', Logout);
 router.get("/me", verifyAccessToken,Me);
 
 module.exports = router;

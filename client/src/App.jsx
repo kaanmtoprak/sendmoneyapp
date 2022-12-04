@@ -18,9 +18,9 @@ const App = () => {
             <Route path="/" element={<Home/>} />
             <Route path='/login' element={<Login/>}/>
             <Route element={<ProtectedAdmin/>}>
-              <Route index path="/admin" element={<Dashboard />} />
+              <Route path="/admin" element={<Dashboard />} />
           </Route>
-<Route path='*' element={<Error404/>} />
+          <Route path='*' element={<Error404/>} />
 
           </Routes>
       

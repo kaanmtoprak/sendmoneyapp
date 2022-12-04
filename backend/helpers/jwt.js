@@ -1,5 +1,7 @@
 const JWT = require("jsonwebtoken") ;
 const Boom = require("boom") ;
+// const NodeCache = require( "node-cache" );
+// const myCache = new NodeCache();
 
 
 const signAccessToken = (data) => {
@@ -9,8 +11,7 @@ const signAccessToken = (data) => {
 		};
 
 		const options = {
-			expiresIn: "10d",
-			issuer: "ecommerce.app",
+			expiresIn: "10d"
 		};
 
 		JWT.sign(payload, process.env.JWT_SECRET, options, (err, token) => {
@@ -51,7 +52,7 @@ const signRefreshToken = (user_id) => {
 		};
 		const options = {
 			expiresIn: "180d",
-			issuer: "ecommerce.app",
+			// issuer: "ecommerce.app",
 		};
 
 		JWT.sign(payload, process.env.JWT_REFRESH_SECRET, options, (err, token) => {
@@ -60,7 +61,8 @@ const signRefreshToken = (user_id) => {
 				reject(Boom.internal());
 			}
 
-			// redis.set(user_id, token, "EX", 180 * 24 * 60 * 60);
+			// myCache.set(user_id, token, "EX", 180 * 24 * 60 * 60);
+			// myCache.set( "myKey", "myValue" )
 
 			resolve(token);
 		});
@@ -78,13 +80,13 @@ const verifyRefreshToken = async (refresh_token) => {
 				}
 
 				const { user_id } = payload;
-				// const user_token = await redis.get(user_id);
+				// const user_token = await myCache.get(user_id);
 
-				if (!user_token) {
+				if (!user_id) {
 					return reject(Boom.unauthorized());
 				}
 
-				if (refresh_token === user_token) {
+				if (refresh_token === user_id) {
 					return resolve(user_id);
 				}
 			}

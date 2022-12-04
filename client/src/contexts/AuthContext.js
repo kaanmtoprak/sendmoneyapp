@@ -38,7 +38,9 @@ const AuthProvider = ({children})=>{
     const logout = async (callback)=>{
         setLoggedIn(false);
         setUser(null);
-        await fetchLogOut();
+        fetchLogOut()
+
+        console.log("aaa")
         localStorage.removeItem("access-token");
         localStorage.removeItem("refresh-token");
         callback();
